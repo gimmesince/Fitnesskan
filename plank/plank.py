@@ -41,7 +41,7 @@ DL_model = load_model(r'C:\Users\Ryan\Documents\learnpython\39\plank\model\saved
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
-fil=r'C:\Users\Ryan\Documents\learnpython\deepfit\Exercise-Correction\demo\plank_demo.mp4'
+fil=r'C:\Users\Ryan\Documents\plank.mp4'
 cap=cv2.VideoCapture(fil)
 
 current_stage = ""
