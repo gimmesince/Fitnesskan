@@ -58,6 +58,7 @@
     <string name="hint_edt_email">Email</string>
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+    <string name="cm">Cm</string>
 
     <string-array name="dataname">
         <item>Squad</item>
@@ -66,6 +67,31 @@
         <item>Lunges</item>
         <item>Plank</item>
         <item>Bench Press</item>
+    </string-array>
+
+    <string-array name="squad">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="bicep">
+        <item>14</item>
+        <item>12</item>
+        <item>10</item>
+        <item>8</item>
+        <item>20</item>
+        <item>16</item>
+    </string-array>
+    <string-array name="deadlift">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </string-array>
 
     <integer-array name="data_photo">

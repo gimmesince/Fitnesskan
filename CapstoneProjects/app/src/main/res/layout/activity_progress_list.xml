@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".progress_list">
 
+    <ImageButton
+        android:id="@+id/btn_back_profile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/baseline_arrow_back_ios_24"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="@+id/explore_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/explore_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:text="ANALYSIS YOUR FROM"
         android:textColor="@color/yellow"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
@@ -55,7 +68,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="52dp"
         android:fontFamily="@font/nunito_sans_regular"
-        android:text="31"
+        android:text="2"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -82,7 +95,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_sans_regular"
         android:layout_marginStart="50dp"
-        android:text="31"
+        android:text="1"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -112,7 +125,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_sans_regular"
         android:layout_marginStart="5dp"
-        android:text="31"
+        android:text="15"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"

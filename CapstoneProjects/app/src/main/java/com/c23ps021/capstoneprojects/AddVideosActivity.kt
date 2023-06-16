@@ -1,46 +1,62 @@
 package com.c23ps021.capstoneprojects
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
+import android.widget.MediaController
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import java.io.IOException
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts
+import com.c23ps021.capstoneprojects.databinding.ActivityAddVideosBinding
+import com.c23ps021.capstoneprojects.databinding.ActivityLanding4Binding
+import com.google.android.exoplayer2.ui.PlayerView
 
 class AddVideosActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddVideosBinding
     private lateinit var btnSelectVideo: Button
     private lateinit var btnUploadVideo: Button
+    private lateinit var videoView: VideoView
+    private lateinit var playerView: PlayerView
     private var selectedVideoUri: Uri? = null
 
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            selectedVideoUri = it
-            Toast.makeText(this, "Video selected: $it", Toast.LENGTH_SHORT).show()
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                selectVideoFromGallery()
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                selectedVideoUri = it
+                videoView.setVideoURI(selectedVideoUri)
+                videoView.start()
+                playerView.player = null // Remove the ExoPlayer from PlayerView if video is played using VideoView
+                Toast.makeText(this, "Video selected: $it", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityAddVideosBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_add_videos)
-
+        setContentView(binding.root)
         btnSelectVideo = findViewById(R.id.btn_select_video)
         btnUploadVideo = findViewById(R.id.btn_upload_video)
+        videoView = findViewById(R.id.video_view)
+        playerView = findViewById(R.id.player_view)
 
         btnSelectVideo.setOnClickListener {
-            selectVideoFromGallery()
+            checkPermissionsAndSelectVideo()
         }
 
         btnUploadVideo.setOnClickListener {
@@ -50,6 +66,32 @@ class AddVideosActivity : AppCompatActivity() {
                 Toast.makeText(this, "No video selected", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.btnBack.setOnClickListener {
+            val intent = Intent(this, home_page::class.java)
+            startActivity(intent)
+        }
+
+        videoView.setOnPreparedListener { mediaPlayer ->
+            val mediaController = MediaController(this)
+            videoView.setMediaController(mediaController)
+            mediaController.setAnchorView(videoView)
+            mediaPlayer.setOnVideoSizeChangedListener { _, _, _ ->
+                mediaController.setAnchorView(videoView)
+            }
+        }
+    }
+
+    private fun checkPermissionsAndSelectVideo() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            selectVideoFromGallery()
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
     }
 
     private fun selectVideoFromGallery() {
@@ -57,42 +99,9 @@ class AddVideosActivity : AppCompatActivity() {
     }
 
     private fun uploadVideo(videoUri: Uri) {
-        val file = videoUri.toFile()
-
-        val requestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("video", file.name, file.asRequestBody("video/*".toMediaTypeOrNull()))
-            .build()
-
-        val request = Request.Builder()
-            .url("https://backend-upload-dot-c23-ps021-387009.et.r.appspot.com")
-            .post(requestBody)
-            .build()
-
-        val client = OkHttpClient()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val response = client.newCall(request).execute()
-                if (response.isSuccessful) {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@AddVideosActivity, "Upload successful", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@AddVideosActivity, "Upload failed", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } catch (e: IOException) {
-                Log.e(TAG, "Error uploading video", e)
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@AddVideosActivity, "Error uploading video", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        val videoPath = "android.resource://${packageName}/${R.raw.model4}"
+        videoView.setVideoURI(Uri.parse(videoPath))
+        videoView.start()
     }
 
-    companion object {
-        private const val TAG = "AddVideosActivity"
-    }
 }

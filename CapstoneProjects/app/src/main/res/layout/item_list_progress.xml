@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvRaps1"
         app:layout_constraintEnd_toStartOf="@+id/tvRaps1"
         app:layout_constraintTop_toTopOf="@+id/tvRaps1"
-        tools:text="@tools:sample/us_zipcodes" />
+        tools:text="0" />
     <TextView
         android:id="@+id/tvRaps1"
         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvRaps2"
         app:layout_constraintEnd_toStartOf="@+id/tvRaps2"
         app:layout_constraintTop_toTopOf="@+id/tvRaps2"
-        tools:text="@tools:sample/us_zipcodes" />
+        tools:text="14" />
     <TextView
         android:id="@+id/tvRaps2"
         android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvRaps3"
         app:layout_constraintEnd_toStartOf="@+id/tvRaps3"
         app:layout_constraintTop_toTopOf="@+id/tvRaps3"
-        tools:text="@tools:sample/us_zipcodes" />
+        tools:text="0" />
     <TextView
         android:id="@+id/tvRaps3"
         android:layout_width="wrap_content"
