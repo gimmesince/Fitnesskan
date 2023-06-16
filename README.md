@@ -20,4 +20,9 @@ Virtual personal fitness trainer app is needed to address public health issues a
 
 # How to replicate our repo
 ## 1. Click Fork in the top-right corner of the page 
-![image.jpeg](https://drive.google.com/file/d/1U-jEwunRXmVgdxsTvTuNhbCuJPq2Pgfh/view?usp=sharing)
+![image.png](https://www.earthdatascience.org/images/earth-analytics/git-version-control/githubguides-bootcamp-fork.png)
+
+## 2. Right now, you have a fork of the Fitnesskan repo, but you do not have the files in that repository locally on your computer. Navigate to your fork of the Fitnesskan repository
+![image.png](https://docs.github.com/assets/cb-32892/images/help/repository/code-button.png)
+
+## 3. Above the list of files, click Download Code. The zip file will be downloaded to your computer.
