@@ -4,12 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.c23ps021.capstoneprojects.databinding.ActivityHomePageBinding
-import com.c23ps021.capstoneprojects.databinding.ActivityLanding4Binding
 
 class home_page : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
@@ -67,7 +64,10 @@ class home_page : AppCompatActivity() {
             val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
             val listHero = ArrayList<User>()
             for (i in dataName.indices) {
-                val hero = User(dataName[i],dataPhoto.getResourceId(i, -1))
+                val hero = User(
+                    dataName[i],
+                    dataPhoto.getResourceId(i, -1),
+                )
                 listHero.add(hero)
             }
             return listHero

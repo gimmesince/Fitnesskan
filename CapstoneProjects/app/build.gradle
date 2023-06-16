@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "com.c23ps021.capstoneprojects"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -75,4 +75,7 @@ dependencies {
     implementation "androidx.camera:camera-view:1.1.0-beta03"
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.14.1'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.1'
+
 }

@@ -27,6 +27,18 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/btn_back_profile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/baseline_arrow_back_ios_24"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView_name"
         android:layout_width="match_parent"
@@ -47,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_sans_regular"
-        android:text="@tools:sample/full_names"
+        android:text="Muhammad Rillo Pambudi"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/textView_name"
         app:layout_constraintTop_toBottomOf="@+id/textView_name" />
@@ -73,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:fontFamily="@font/nunito_sans_regular"
-        android:text="@tools:sample/lorem"
+        android:text="rillopambudi09@gmail.com"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Email" />
@@ -99,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:fontFamily="@font/nunito_sans_regular"
-        android:text="@tools:sample/us_zipcodes"
+        android:text="60"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Weight" />
@@ -136,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:fontFamily="@font/nunito_sans_regular"
-        android:text="@tools:sample/us_zipcodes"
+        android:text="160"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Height" />
@@ -146,7 +158,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_sans_regular"
-        android:text="@string/kg"
+        android:text="@string/cm"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.032"
