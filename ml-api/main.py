@@ -1,9 +1,12 @@
-from flask import Flask,render_template,Response
+from flask import Flask,render_template,Response, jsonify
+import json
 import cv2
+import os
 import mediapipe as mp
 import numpy as np
 import pandas as pd
 import pickle
+import tensorflow
 from keras.models import load_model
 
 app=Flask(__name__)
@@ -100,7 +103,7 @@ def generate_frames():
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
             ret, frame = cap.read()
-            
+            frame_data 
             # Recolor image to RGB
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image.flags.writeable = False
@@ -235,6 +238,18 @@ def generate_frames():
             yield(b'--frame\r\n'
                   b'Content-Type: image/jpeg\r\n\r\n' + image + b'\r\n')
             
+    data = {
+        "left_reps": left_counter,
+        "left_stage": left_stage,
+        "right_reps": right_counter,
+        "right_stage": right_stage,
+        "posture": posture,
+        "predicted_class": predicted_class,
+        "prediction_probability": prediction_probability,
+        "upper_hand_pose": upper_hand_pose
+    }
+    json_data = json.dumps(data)
+    yield json_data
 
 @app.route('/')
 def index():
@@ -243,7 +258,7 @@ def index():
 
 @app.route('/video')
 def video():
-    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(generate_frames(), mimetype='application/json')
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
